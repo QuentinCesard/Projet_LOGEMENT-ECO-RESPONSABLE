@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Logement Éco-Responsable</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .navbar {
+            padding: 1rem 2rem;
+            background-color: #34C759; 
+            display: flex;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-size: 1.4rem;
+            color: #fff; 
+            margin-right: 20px;
+        }
+        .nav-item {
+            margin-right: 20px;
+        }
+        .nav-link {
+            font-size: 1.1rem;
+            color: #fff; 
+        }
+        .nav-link:hover {
+            color: #ccc; 
+        }
+        .logo {
+            width: 4%;
+            height: auto;
+            margin-right: 20px;
+        }
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <img src="Animal_Crossing_Leaf.png" alt="Une description de l'image" class="logo" style="width: 2%; height: auto; margin-right: 20px;">
+        <a class="navbar-brand" href="#" title="EcoLogement, le meilleur pour gérer votre consommation d'énergie, depuis 2023" data-toggle="tooltip" data-placement="bottom">EcoLogement</a>
+        <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();   
+        });
+    </script>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Accueil <span class="sr-only">(current)</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="consommation.html">Consommation</a></li>
+                <li class="nav-item"><a class="nav-link" href="capteurs.html">Capteurs</a></li>
+                <li class="nav-item"><a class="nav-link" href="economies.html">Économies</a></li>
+                <li class="nav-item active"><a class="nav-link" href="configuration.html">Configuration</a></li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="apropos.html">À propos</a></li>
+            </ul>
+        </div>
+    </nav>
+    <h1 class="text-center my-4">Ajouter un Capteur</h1>
+    <form id="capteurForm" class="container">
+        <div class="form-group">
+            <label for="Ref_Commercial">Référence Commerciale:</label>
+            <input type="text" id="Ref_Commercial" name="Ref_Commercial" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="type_capteur_id">Type Capteur ID:</label>
+            <input type="text" id="type_capteur_id" name="type_capteur_id" class="form-control" required>
+            
+        </div>
+                <div class="form-group">
+            <label for="idPiece">ID Pièce:</label>
+            <input type="number" id="idPiece" name="idPiece" class="form-control" required>
+            <div id="idPieceError" class="invalid-feedback"></div>
+        </div>
+        
+        <div class="form-group">
+            <label for="Port_communication">Port Communication:</label>
+            <input type="number" id="Port_communication" name="Port_communication" class="form-control" required>
+        </div>
+        
+        <button type="button" class="btn btn-success" onclick="envoyerDonnees()">Ajouter</button>
+    </form>
+
+    <div class="message text-center my-4" id="message"></div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        async function envoyerDonnees() {
+            const form = document.getElementById('capteurForm');
+            const data = {
+                Ref_Commercial: form.Ref_Commercial.value,
+                type_capteur_id: form.type_capteur_id.value,
+                idPiece: parseInt(form.idPiece.value),
+                Port_communication: parseInt(form.Port_communication.value)
+            };
+            try {
+                const response = await fetch('/capteurs/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const result = await response.json();
+                document.getElementById('message').textContent = result.message;
+            } catch (error) {
+                document.getElementById('message').textContent = "Erreur lors de l'envoi des données.";
+                console.error("Erreur:", error);
+            }
+        }
+    </script>
+</body>
+</html>

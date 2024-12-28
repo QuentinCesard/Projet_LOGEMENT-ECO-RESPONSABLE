@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Logement Éco-Responsable</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .navbar {
+            padding: 1rem 2rem;
+            background-color: #34C759; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-size: 1.8rem;
+            color: #fff; 
+            display: flex;
+            align-items: center;
+        }
+        .logo {
+            width: 40px;
+            height: auto;
+            margin-right: 10px;
+        }
+        .vignettes {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .vignette {
+            width: 200px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            text-align: center;
+            padding: 15px;
+        }
+        .vignette img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        .vignette:hover {
+            transform: scale(1.05);
+            background-color: #e9ecef;
+        }
+        .vignette a {
+            text-decoration: none;
+            color: #34C759;
+            font-weight: bold;
+            margin-top: auto;
+        }
+        .footer-links {
+            margin-top: 50px;
+            text-align: center;
+        }
+        .footer-links a {
+            margin: 0 15px;
+            color: #34C759;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        .hidden-content {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .hidden-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        .bouncing {
+            animation: bounce 0.5s infinite;
+        }
+        .scroll-indicator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 2rem;
+            color: #34C759;
+            cursor: pointer;
+            animation: bounce 0.5s infinite;
+        }
+        .scroll-indicator.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a class="navbar-brand" href="#" title="EcoLogement, le meilleur pour gérer votre consommation d'énergie, depuis 2023">
+            <img src="Animal_Crossing_Leaf.png" alt="Logo" class="logo">
+            EcoLogement
+        </a>
+    </nav>
+    <div class="container-fluid mt-5">
+        <h1 id="bouncing-text" class="text-center bouncing">Bienvenue sur le site de gestion de votre logement éco-responsable</h1>
+        <p id="bouncing-subtext" class="text-center bouncing">Gérez votre consommation d'énergie, suivez vos économies et configurez vos capteurs.</p>
+        <div id="scroll-indicator" class="scroll-indicator">▼</div>
+        <div class="hidden-content" id="scroll-content">
+            <h2 class="text-center mt-4">Voici ce que vous pouvez visualiser</h2>
+            <div class="vignettes">
+                <div class="vignette">
+                    <a href="consommation.html">
+                        <img src="Image/pngtree-energy-consuming-icon-png-image_6569271.png" alt="Consommation">
+                        Consommation
+                    </a>
+                </div>
+                <div class="vignette">
+                    <a href="capteurs.html">
+                        <img src="Image/domotique-maison-schema.png" alt="Capteurs">
+                        Capteurs
+                    </a>
+                </div>
+                <div class="vignette">
+                    <a href="economies.html">
+                        <img src="/Image/images.jpeg" alt="Économies">
+                        Économies
+                    </a>
+                </div>
+                <div class="vignette">
+                    <a href="configuration.html">
+                        <img src="Image/2891421.png" alt="Configuration">
+                        Configuration
+                    </a>
+                </div>
+            </div>
+            <div id="meteo" class="w-100 mt-5">
+                <!-- La météo sera chargée ici -->
+            </div>
+            <div class="footer-links">
+                <a href="contact.html">Contact</a>
+                <a href="apropos.html">À propos</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        let userScrolled = false;
+        const bouncingText = document.getElementById('bouncing-text');
+        const bouncingSubtext = document.getElementById('bouncing-subtext');
+        const scrollIndicator = document.getElementById('scroll-indicator');
+        const scrollContent = document.getElementById('scroll-content');
+
+        document.addEventListener('scroll', () => {
+            userScrolled = true;
+            bouncingText.classList.remove('bouncing');
+            bouncingSubtext.classList.remove('bouncing');
+            scrollIndicator.classList.add('hidden');
+            scrollContent.classList.add('visible');
+        });
+
+        setInterval(() => {
+            if (!userScrolled) {
+                bouncingText.classList.add('bouncing');
+                bouncingSubtext.classList.add('bouncing');
+            }
+        }, 500);
+
+        fetch('meteo/')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erreur réseau');
+                }
+                return response.text();
+            })
+            .then(html => {
+                const meteoDiv = document.getElementById('meteo');
+                meteoDiv.innerHTML = html;
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                const meteoDiv = document.getElementById('meteo');
+                meteoDiv.innerHTML = 'Erreur lors du chargement des données météo.';
+            });
+    </script>
+</body>
+</html>

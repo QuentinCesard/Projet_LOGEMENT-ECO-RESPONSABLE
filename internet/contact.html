@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Logement Éco-Responsable</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .navbar {
+            padding: 1rem 2rem;
+            background-color: #34C759; 
+            display: flex;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-size: 1.4rem;
+            color: #fff; 
+            margin-right: 20px;
+        }
+        .nav-item {
+            margin-right: 20px;
+        }
+        .nav-link {
+            font-size: 1.1rem;
+            color: #fff; 
+        }
+        .nav-link:hover {
+            color: #ccc; 
+        }
+        .logo {
+            width: 4%;
+            height: auto;
+            margin-right: 20px;
+        }
+        .apropos {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .apropos h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .apropos p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+    <img src="Animal_Crossing_Leaf.png" alt="Une description de l'image" class="logo" style="width: 2%; height: auto; margin-right: 20px;">
+    <a class="navbar-brand" href="#" title="EcoLogement, le meilleur pour gérer votre consommation d'énergie, depuis 2023" data-toggle="tooltip" data-placement="bottom">EcoLogement</a>
+    <script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();   
+    });
+</script>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="index.html">Accueil <span class="sr-only">(current)</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="consommation.html">Consommation</a></li>
+            <li class="nav-item"><a class="nav-link" href="capteurs.html">Capteurs</a></li>
+            <li class="nav-item"><a class="nav-link" href="economies.html">Économies</a></li>
+            <li class="nav-item"><a class="nav-link" href="configuration.html">Configuration</a></li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active"><a class="nav-link" href="contact.html">Contact</a></li>
+            <li class="nav-item"><a class="nav-link" href="apropos.html">À propos</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="apropos">
+    <h1>Mon contact</h1>
+    <p style="color: blue; font-style: italic;">quentin.cesard@etu.sorbonne-universite.fr</p>
+</div>
+<footer class="fixed-bottom" style="text-align: center;">Créé par Quentin CESARD</footer>

@@ -1,0 +1,22 @@
+2. Serveur RESTful
+
+2.1 Exercice 1 : remplissage de la base de données
+Cette partie ce trouve entre les lignes 70 et 114 dans le fichier remplissage.py.
+J'ai commencer par créer une Class pour les mesures et factures puis j'ai effectué un post (en réutilisant les fonction suivante) et un get 
+
+2.2 Exercice 2 : serveur web
+Utilisation de Chatgpt car je n'ai jamais appris le HTML, je lui ai demander de m'expliquer et de m'aider à réaliser un graph à partir d'information dans une base de donnée.
+Cette partie ce trouve entre les lignes 121 et 160 dans le fichier remplissage.py.
+Pour afficher le graph sur un page html, j'ai effectué un get pour récupérer toutes les information sur la table facture avec la requet SQL SELECT ... FROM ... . Puis on effectue une boucle pour mettre les type et les montant dans une liste, puis  on transforme cette liste en chaine JSON.
+On termine par afficher un graph pour cela on crée un conteneur <div> dans lequel le graphique sera affiché, on prépare les données sous forme de tableau JavaScript à partir des informations récupérées dans la base de données, on utilise une fonction pour dessiner un graphique dans le conteneur, en affichant les montants des factures par type avec un titre ("Factures") et lorsque l'utilisateur accèdera à l'URL, le graphique sera affiché dans son navigateur.
+
+
+2.3 Exercice 3 : météo
+Utilisation de chatGpt pour le code html et de video youtube pour comprendre comment utiliser OpenWeather :https://www.youtube.com/watch?v=IkJ8Sx3yBwg&t=268s
+Dans la première partie du code, on envoi une requet GET pour accéder au information métérologique contenu dans OpenWeather, la réponse, au format JSON, sera stocké. 
+On créer un tableau pour afficher les données recus. On le rempli aves les données de OpenWeather.
+
+2.4 Exercice 4 : intégration
+Pour utiliser cette partie, il faut modifier dans le fichier Temp_capteur.ino, le #define STASSID "Gad" et le #define STAPSK "Gadou242@", qui correceponde au nom et mot de passe de votre réseau, attention les partage de connexion avec des iphone ne fonctionne pas, il faudra aussi changer le #define SERVER_IP "192.168.75.23:8000", et le remplacer par votre adresse IP locale ou tourne le serveur.
+Pour cette partie, il a fallut réutiliser un code fait dans les TP avec Mr Douze, qui récupère la température de la pièces, je l'ai adapté, pour qu'il post une chaine JSON sur notre srveur (http://" SERVER_IP "/postplain/"). Cette chaine JSON, contient un id la température et l'humidité.
+On utilise un post pour récupérer ces information, et on réutilise la fonction créer au début pour ajouter ces information dans la base de données.

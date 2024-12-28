@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphique des Factures</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+        .navbar {
+            padding: 1rem 2rem;
+            background-color: #34C759;
+            width: 100%;
+        }
+        .navbar-brand {
+            font-size: 1.4rem;
+            color: #fff;
+        }
+        .nav-item {
+            margin-right: 20px;
+        }
+        .nav-link {
+            font-size: 1.1rem;
+            color: #fff;
+        }
+        .nav-link:hover {
+            color: #ccc;
+        }
+        .logo {
+            width: 4%;
+            height: auto;
+            margin-right: 20px;
+        }
+        h1 { text-align: center; color: #000000; margin-top: 20px; }
+        #piechart {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 900px;
+            height: 500px;
+            margin-top: 20px;
+        }
+        .container {
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <img src="Animal_Crossing_Leaf.png" alt="Logo" class="logo">
+        <a class="navbar-brand" href="#">EcoLogement</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Accueil<span class="sr-only">(current)</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="consommation.html">Consommation</a></li>
+                <li class="nav-item"><a class="nav-link" href="capteurs.html">Capteurs</a></li>
+                <li class="nav-item active"><a class="nav-link" href="economies.html">Économies</a></li>
+                <li class="nav-item"><a class="nav-link" href="configuration.html">Configuration</a></li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="apropos.html">À propos</a></li>
+            </ul>
+        </div>
+    </nav>
+    <h1>Graphique des Factures</h1>
+    <div id="piechart">Chargement du graphique...</div>
+    <div class="container mt-5">
+        <div id="graphContainer"></div>
+    </div>
+
+    <script>
+        // Fonction pour charger et afficher le graphique
+        function fetchGraphData() {
+            fetch('Afficher_graph_facture/')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erreur de réseau');
+                    }
+                    return response.text(); // Récupérer la réponse comme du texte (HTML complet)
+                })
+                .then(html => {
+                    // Injecter le contenu HTML complet dans l'élément graphContainer
+                    const graphContainer = document.getElementById('graphContainer');
+                    graphContainer.innerHTML = html;
+
+                    // Exécuter les scripts injectés manuellement
+                    const scripts = graphContainer.querySelectorAll('script');
+                    scripts.forEach(script => {
+                        const newScript = document.createElement('script');
+                        newScript.textContent = script.textContent; // Copier le contenu du script
+                        document.body.appendChild(newScript); // Ajouter le script au body pour l'exécuter
+                        script.remove(); // Optionnel : retirer les anciens scripts
+                    });
+                })
+                .catch(error => {
+                    console.error('Erreur lors du chargement du graphique:', error);
+                    document.getElementById('graphContainer').innerHTML = 'Erreur lors du chargement du graphique.';
+                });
+        }
+
+        // Charger le graphique lorsque la page est prête
+        window.onload = fetchGraphData;
+    </script>
+</body>
+</html>

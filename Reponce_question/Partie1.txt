@@ -1,0 +1,67 @@
+Logement Eco Responsable Quentin Cesard :
+
+1.Base de donnée :
+
+1.1 Spécifications de la base de données:
+/!\ Pour exécuter le fichier .sql et remplir ma base de donnée, j'ai toujours utilisé la commande sqlite3 data.db < logement.sql, lorsque j'étais dans mon répertoire.
+
+Question 1:
+Les Adresse son liées au ville, les logements sont liées au adresse, les logement contiennent des pièces, les pièces contiennent des capteurs, les capteur sont d'un type et ils sont aussi composés de mesures. Les logement contiennent aussi des factures.
+
+Ville ⇔ Adresse (1:N)
+Adresse ⇔ Logement (1:N)
+Logement ⇔ Pieces (1:N)
+Pieces ⇔ Capteur (1:N)
+Capteur ⇔ TypeCapteur (N:1)
+Capteur ⇔ Mesure (1:N)
+Logement ⇔ Facture (1:N)
+
+Question 2:
+Dans un premier tant que supprime toutes les tables existantes dans ma base de donnée, avec la commande "DROP TABLE IF EXISTS".
+J'utilise cette commande pour chaque table.
+
+Question 3: 
+Voici les différente table, avec leurs champs :
+
+Table Logement, cette table à les champs suivant :
+id qui s'incrémentera automatiquement, l'adresse qui ira chercher l'adresse dans la table adresse en fonction de l'id, un téléphone qui sera aussi à rentrer, j'ai imaginer qu'on pouvais rentrer une IP, pour terminer la date d'insertion qui se rajoutera directement au moment de l'ajout
+
+
+La table Adresse, les champs sont : code qui s'incrémentera automatiquement, la Numéro qui est à rentrer, la Voie qui est à rentrer, le Nom de voie qui est à rentrer, et la ville qui ira chercher la ville dans la table ville en fonction de l'id
+
+La table ville a comme champ le code postal (city) et le de la ville 
+
+La table Pièces a comme champ l'id qui s'incrémentera automatiquement, le logement auquelle il est relié il ira chercher le logement dans la tabke logement en fonction de l'ID, le nom de la pièce à rentrer, et sa localisation dans la maison
+
+La table capteur a comme champ un id qui s'incrémente automatiquement, la ref commerciale à rentrer, le type de capteur qui ira chercher sa valeur dans la table type de capteur, la pièces ou il est le programme ira chercher cette information dans la table pièce,Un port de communication à rentrer, et la date d'insertion qui se rajoutera directement au moment de l'ajout
+
+La table Type capteur a un id qui s'incrémente automatiquement, un type de cpteur à rentrer, une unité qui dépend du type de capteur, et une précision qui est  rentrer
+
+La table mesure, a comme champ un id qui s'incrémente automatiquement, un id capteur qui récupère dans la table capteur, une valeur à rentrer, et une date d'intégration qui se mets automatiquement à l'ajout
+
+La table facture à comme champ un id qui s'incrémente automatiquement, un id logement qui ira chercher l'information dans la tabkle logement, un type qui sera à rentrer, uen date qui se mettera automatiquement, et un montant à rentrer, et une valeur de consomation à rentrer
+
+Question 4:
+Pour créer un logement avec 4 pièces, va falloir en premier créer une ville, une adresse, un logement et 4 pièces.
+Donc pour la Ville je vais en créer 4, pour un peu de variété. Je créer ensuite différentes adresse (4). Je créer ensuite une logement situé à une de ces adresses, puis dans ce logement je créer 3 pièces, la cuisine, la chambre, le salon et la salle à manger.
+
+Question 5:
+Pour créer les 4 type de capteur, j'ai rempli les champs attendus (type_capteur, unité, précision), et j'ai crée un capteur pour l'Humidité, pour la température, pour la distance et pour la fumé.
+
+Question 6:
+Puisque j'ai créer 4 type de capteur, j'ai pu créer 2 capteurs, un de température et un d'humidité.
+
+Question 7:
+J'ai ajouté au deux capteurs des mesures aléatoire.
+
+Question 8:
+J'ai juste ajouté 4 factures.
+
+1.2 Remplissage de la base de données :
+
+Pour ajouter une nouvelle mesure dans la base de donnée, ma fonction va avoir 2 paramètres, l'id du capteur et la valeur à ajouter.
+Pour ajouter des information dans la base de donnée, on doit utiliser un Insert into suivie de la table (ici Mesure), et on rajoute ensuite les colones à remplire. On termine par commit pour bien enregistrer les modificatiosn dans la base de donnée.
+
+On effectue la même choses pour ajouter des factures, on changera juste dans l'Insert Into la table et les colones à remplire.
+
+On poura tester ces fonction en les appelant.
