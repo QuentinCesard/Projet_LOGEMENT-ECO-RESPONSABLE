@@ -1,6 +1,6 @@
 3 HTML/CSS/Javascript :
 
-Utilisation de chatGPT et de tuto en ligne pour m'aider avec le code html. Exemple de prompt : "Qu'elle requête HTTP pour obtenir le contenu d'une page", "Comment centrer le tout", "Donne moi un code d'une page internet basic" (pour avoir la structure)...
+Utilisation de chatGPT et de tuto en ligne pour m'aider avec le code html. Exemple de prompt : "Quelle requête HTTP pour obtenir le contenu d'une page", "Comment centrer le tout", "Donne moi un code d'une page internet basic" (pour avoir la structure)...
 
 J'ai décider de créer plusieurs pages, une page d'accueil qui permet d'accéder au onglet, et qui renverra le tableau des prévision météorologique fait en partie 2.3 :
 
