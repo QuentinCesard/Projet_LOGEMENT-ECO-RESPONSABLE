@@ -1,17 +1,19 @@
 3 HTML/CSS/Javascript :
 
-Utilisation de chatGPT et de tuto en ligne pour m'aider avec le code html.
+Utilisation de chatGPT et de tuto en ligne pour m'aider avec le code html. Exemple de prompt : "Qu'elle requête HTTP pour obtenir le contenu d'une page", "Comment centrer le tout", "Donne moi un code d'une page internet basic" (pour avoir la structure)...
 
 J'ai décider de créer plusieurs pages, une page d'accueil qui permet d'accéder au onglet, et qui renverra le tableau des prévision météorologique fait en partie 2.3 :
 
 Consommation, dans cette onglet on pourra retrouver un graphique en fonction du temp avec toutes les mesure effectuer des différent capteur.
-Pour effectuer cela (lignes 315 à 348 dans remplissage.py), je récupère toutes les mesures dans la base de donnée (SELECT * FROM Mesure). Par la suite je récupère les différente colonne utile (idCapteur, valeur et la date). Oui j'injecterais le tout dans la page internet et ce get retourne une réponse html.
+Pour effectuer cela (lignes 315 à 348 dans remplissage.py), je récupère toutes les mesures dans la base de donnée (SELECT * FROM Mesure). Par la suite je récupère les différente colonne utile (idCapteur, valeur et la date). Puis j'injecterais le tout dans la page internet et ce get retourne une réponse html.
+Du côté page internet j'effectue un fetch pour récupérer le graph.
 
 Capteur, dans cette onglet on va retrouver la liste des capteurs dans la base de donné, pour cela on effectue un get sur la base de donné dans la table capteur, et ont renvois une liste avec tous les capteurs.
-J'ai aussi rajouter une option pour supprimer un capteur, pour cela on effectue un délet sur la base de données en fonction d'un id (DELETE FROM Capteur WHERE id = ?", (id,)).
+J'ai aussi rajouter une option pour supprimer un capteur, pour cela on effectue un delete sur la base de données en fonction d'un id (DELETE FROM Capteur WHERE id = ?", (id,)).
+Du coté de la page, j'effectue un fetch pour récupérer toutes les informations des capteur, pareil pour supprimer un capteur.
 
-Economis, dans cette onglet, on retrouve le graph que nous avons créer dans la partie 2.2.
+Economis, dans cette onglet, on retrouve le graph que nous avons créer dans la partie 2.2, je le récupère grâce à un fetch.
 
 Configuration, dans cette onglet, on peut rajouter un nouveau capteur.
 Pour cela j'ai créer une nouvelle fonction qui permet d'ajouter un nouveau capteur, un peu comme les fonction du début, ici il faudra les arguments suivants (Ref_Commercial, type_capteur_id, idPiece, Port_communication).
-Puis j'effectue un post pour récupérer les information rentré par l'utilisateur pour pouvoir utiliser la fonction et remplir la base de donnée.
+Puis j'effectue un post pour récupérer les information rentré par l'utilisateur pour pouvoir utiliser la fonction et remplir la base de donnée, j'ai accès à ce post grace à un fetch.

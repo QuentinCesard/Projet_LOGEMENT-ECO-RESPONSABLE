@@ -347,7 +347,7 @@ def afficher_graph_mesures():
     """
     return HTMLResponse(content=html)
 
-#affiche les mesures brut
+#affiche les capteur brut
 @app.get("/les_capteurs/")
 def api_get_all_factures():
      # ouverture/initialisation de la base de donnee 
@@ -358,6 +358,7 @@ def api_get_all_factures():
     rows = cursor.fetchall()#le mets sous forme de liste
     return rows
 
+#fonction pour ajouter un capteur
 def ajouter_capteur(Ref_Commercial, type_capteur_id, idPiece, Port_communication):
     # ouverture/initialisation de la base de donnee 
     conn = sqlite3.connect('data.db', check_same_thread=False)
@@ -381,7 +382,7 @@ def api_ajouter_mesures(capt: Capteur):
     ajouter_capteur(capt.Ref_Commercial, capt.type_capteur_id, capt.idPiece, capt.Port_communication )
     return {"message": f"Capteur bien ajoutée"}
 
-
+#Supprime un capteur
 @app.delete("/capteurs/{id}")
 def delete_capteur(id: int):
     conn = sqlite3.connect('data.db', check_same_thread=False)

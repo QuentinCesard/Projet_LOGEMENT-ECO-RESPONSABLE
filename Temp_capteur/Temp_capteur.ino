@@ -100,3 +100,5 @@ void loop() {
     http.end();
   }
 
+  delay(1000);
+}
